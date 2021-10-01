@@ -1,0 +1,23 @@
+input
+{
+    beats
+    {
+        port => 5044
+    }
+}
+filter
+{
+    grok
+    {
+        "match" => { "message" => "%{COMBINEDAPACHELOG}"}
+    }
+}
+output
+{
+    elasticsearch
+    {
+        index => "apache-%{+yyyy.MM.dd}"
+        hosts => "172.31.16.203"
+    }
+
+}
